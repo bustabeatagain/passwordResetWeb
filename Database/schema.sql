@@ -24,7 +24,7 @@ GO
 -- Create the table in the specified schema
 CREATE TABLE School
 (
-    Id INT NOT NULL PRIMARY KEY, -- primary key column
+    Id INT IDENTITY(1, 1) PRIMARY KEY, -- primary key column
     Name [NVARCHAR](255) NOT NULL
 );
 GO
@@ -40,7 +40,7 @@ GO
 -- Create the table in the specified schema
 CREATE TABLE Teacher
 (
-    Id INT NOT NULL PRIMARY KEY, -- primary key column
+    Id INT IDENTITY(1, 1) PRIMARY KEY, -- primary key column
     Name [NVARCHAR](255) NOT NULL
 );
 GO
@@ -52,8 +52,8 @@ GO
 -- Create the table in the specified schema
 CREATE TABLE Student
 (
-    Id INT NOT NULL PRIMARY KEY, -- primary key column
-    Name [NVARCHAR](50) NOT NULL
+    Id INT IDENTITY(1, 1) PRIMARY KEY, -- primary key column
+    Name [NVARCHAR](255) NOT NULL
 );
 GO
 -- Create a new table called 'TeachesAt' in schema 'dbo'
