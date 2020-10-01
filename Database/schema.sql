@@ -15,7 +15,11 @@ GO
 -- Create a new table called 'TableName' in schema 'SchemaName'
 -- Drop the table if it already exists
 IF OBJECT_ID('dbo.School', 'U') IS NOT NULL
-DROP TABLE School
+BEGIN
+    ALTER TABLE dbo.TeachesAt
+        DROP CONSTRAINT [FK_TeachesAt_School]
+    DROP TABLE School
+END
 GO
 -- Create the table in the specified schema
 CREATE TABLE School
@@ -27,7 +31,11 @@ GO
 -- Create a new table called 'Teacher' in schema 'SchemaName'
 -- Drop the table if it already exists
 IF OBJECT_ID('dbo.Teacher', 'U') IS NOT NULL
-DROP TABLE Teacher
+BEGIN
+    ALTER TABLE dbo.TeachesAt
+        DROP CONSTRAINT [FK_TeachesAt_Teacher]
+    DROP TABLE Teacher
+END
 GO
 -- Create the table in the specified schema
 CREATE TABLE Teacher
@@ -57,8 +65,20 @@ GO
 CREATE TABLE dbo.TeachesAt
 (
     SchoolId INT NOT NULL,
-    TeacherId INT NOT NULL
+    TeacherId INT NOT NULL,
+    CONSTRAINT [PK_TeachesAt] PRIMARY KEY CLUSTERED (
+        [SchoolId] ASC,
+        [TeacherId] ASC
+    )
 );
+GO
+ALTER TABLE dbo.TeachesAt WITH CHECK 
+    ADD CONSTRAINT [FK_TeachesAt_School] FOREIGN KEY([SchoolId])
+    REFERENCES [dbo].[School] ([Id])
+GO
+ALTER TABLE [dbo].[TeachesAt]  WITH CHECK 
+    ADD  CONSTRAINT [FK_TeachesAt_Teacher] FOREIGN KEY([TeacherId])
+    REFERENCES [dbo].[Teacher] ([Id])
 GO
 -- Create a new table called 'GoesTo' in schema 'SchemaName'
 -- Drop the table if it already exists
