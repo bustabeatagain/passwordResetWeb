@@ -1,6 +1,6 @@
 using System;
 
-namespace passwordResetWeb
+namespace PasswordResetWeb
 {
     public class WeatherForecast
     {

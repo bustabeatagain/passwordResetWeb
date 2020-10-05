@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
-namespace passwordResetWeb.Controllers
+namespace PasswordResetWeb.Controllers
 {
     [ApiController]
     [Route("[controller]")]

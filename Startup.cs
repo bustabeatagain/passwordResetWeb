@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using PasswordResetWeb.Services;
+using CurrentPersistence = PasswordResetWeb.Services.SqlServer.Persistence;
 
 namespace passwordResetWeb
 {
@@ -25,6 +27,7 @@ namespace passwordResetWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<PersistenceBase, CurrentPersistence>();
             services.AddControllers();
         }
 
