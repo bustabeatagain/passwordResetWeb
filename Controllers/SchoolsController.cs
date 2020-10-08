@@ -1,5 +1,8 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using PasswordResetWeb.Entities;
+using PasswordResetWeb.Services;
 
 namespace PasswordResetWeb.Controllers
 {
@@ -8,20 +11,19 @@ namespace PasswordResetWeb.Controllers
     public class SchoolsController : ControllerBase
     {
         public IConfiguration Configuration { get; }
-        public SchoolsController(IConfiguration configuration)
+        public PersistenceBase Persistence { get; }
+        
+        public SchoolsController(IConfiguration configuration, PersistenceBase persistence)
         {
             Configuration = configuration;
+            Persistence = persistence;
             var connectionString = Configuration.GetConnectionString("PasswordWeb");
         }
 
         [HttpGet]
-        public string Get()
+        public IEnumerable<School> Get(string name)
         {
-            return @"[
-        {""id"": 1, ""name"": ""Neal""},
-        {""id"": 2, ""name"": ""Southern High""},
-        {""id"": 3, ""name"": ""Githens""}
-    ]";
+            return Persistence.GetSchoolsByPartialName(name);
         }
     }
 }

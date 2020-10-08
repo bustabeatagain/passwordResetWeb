@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
 using Microsoft.Extensions.Configuration;
 using PasswordResetWeb.Entities;
 
@@ -7,16 +9,32 @@ namespace PasswordResetWeb.Services.SqlServer
     public class Persistence : PersistenceBase
     {
         public IConfiguration Configuration { get; }
-
+        private string ConnectionString { get; }
         public Persistence(IConfiguration configuration)
         {
-            this.Configuration = configuration;
-            var connectionString = Configuration.GetConnectionString("PasswordWeb");
+            Configuration = configuration;
+            ConnectionString = Configuration.GetConnectionString("PasswordWeb");
         }
 
         public override IEnumerable<School> GetSchoolsByPartialName(string partialName)
         {
-            throw new System.NotImplementedException();
+            using(var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                using(var command = new SqlCommand("SELECT * FROM School where Name LIKE @Name", connection))
+                {
+                    command.Parameters.AddWithValue("@Name", $"%{partialName}%");
+                    using(var reader = command.ExecuteReader()) {
+                        while(reader.Read())
+                        {
+                            var id = reader.GetInt32(0);
+                            var name = reader.GetString(1);
+                            yield return new School {Id = id, Name = name};
+                        }
+                    }
+                }    
+            }
+            
         }
     }
 }

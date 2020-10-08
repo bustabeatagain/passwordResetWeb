@@ -1,8 +1,8 @@
 namespace PasswordResetWeb.Entities
 {
-    public abstract class School
+    public class School
     {
-        public abstract long Id {get; set;}
-        public abstract string Name {get;set;}
+        public long Id { get; set; }
+        public string Name { get; set; }
     }
 }
