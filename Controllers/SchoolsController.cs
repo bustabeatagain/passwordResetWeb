@@ -21,9 +21,17 @@ namespace PasswordResetWeb.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<School> Get(string name)
+        public IEnumerable<School> Get(string q)
         {
-            return Persistence.GetSchoolsByPartialName(name);
+            return Persistence.GetSchoolsByPartialName(q);
         }
+
+        [HttpGet]
+        public School GetSchool(int id)
+        {
+            
+        }
+
+
     }
 }

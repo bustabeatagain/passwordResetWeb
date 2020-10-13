@@ -36,5 +36,28 @@ namespace PasswordResetWeb.Services.SqlServer
             }
             
         }
+
+        public override School GetSchoolById(int id)
+        {
+            using(var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                using(var command = new SqlCommand("SELECT * FROM School where Id = @Id", connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+                    using(var reader = command.ExecuteReader()) {
+                        if(reader.Read())
+                        {
+                            var name = reader.GetString(1);
+                            return new School {Id = id, Name = name};
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                }    
+            }
+        }
     }
 }
