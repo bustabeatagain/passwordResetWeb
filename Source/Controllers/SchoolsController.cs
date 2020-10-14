@@ -29,7 +29,7 @@ namespace PasswordResetWeb.Controllers
         [HttpGet]
         public School GetSchool(int id)
         {
-            
+            return null;
         }
 
 
