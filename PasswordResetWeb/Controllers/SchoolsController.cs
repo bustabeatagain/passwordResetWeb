@@ -27,9 +27,10 @@ namespace PasswordResetWeb.Controllers
         }
 
         [HttpGet]
+        [Route("{id}")]
         public School GetSchool(int id)
         {
-            return null;
+            return new School {Id = id, Name = "Some school"};
         }
 
 

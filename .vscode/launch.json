@@ -10,7 +10,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/Source/bin/Debug/netcoreapp3.1/passwordResetWeb.dll",
+            "program": "${workspaceFolder}/PasswordResetWeb/bin/Debug/netcoreapp3.1/passwordResetWeb.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
