@@ -13,6 +13,8 @@ using Microsoft.Extensions.Logging;
 using PasswordResetWeb.Services;
 using CurrentPersistence = PasswordResetWeb.Services.SqlServer.Persistence;
 using CurrentPasswordManager = PasswordResetWeb.Services.ActiveDirectory.PasswordManager;
+using CurrentRandomizer = PasswordResetWeb.Services.Common.Randomizer;
+
 namespace passwordResetWeb
 {
     public class Startup
@@ -29,6 +31,7 @@ namespace passwordResetWeb
         {
             services.AddScoped<PersistenceBase, CurrentPersistence>();
             services.AddSingleton<PasswordManagerBase, CurrentPasswordManager>();
+            services.AddSingleton<RandomizerBase, CurrentRandomizer>();
             services.AddControllers();
         }
 
